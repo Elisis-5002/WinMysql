@@ -58,7 +58,7 @@
             // salirToolStripMenuItem
             // 
             salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            salirToolStripMenuItem.Size = new Size(270, 34);
+            salirToolStripMenuItem.Size = new Size(147, 34);
             salirToolStripMenuItem.Text = "Salir";
             // 
             // cátalogoToolStripMenuItem
@@ -73,6 +73,7 @@
             materiaToolStripMenuItem.Name = "materiaToolStripMenuItem";
             materiaToolStripMenuItem.Size = new Size(270, 34);
             materiaToolStripMenuItem.Text = "Materia";
+            materiaToolStripMenuItem.Click += materiaToolStripMenuItem_Click;
             // 
             // alumnosToolStripMenuItem
             // 

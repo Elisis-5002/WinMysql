@@ -5,21 +5,20 @@ services:
     image: mysql:latest
     container_name: mysql_server
     restart: always
-    environment: 
-      MYSQL_ROOT_PASSWORD: joseluis
+    environment:
+      MYSQL_ROOT_PASSWORD: anaelisa
       MYSQL_DATABASE: escolar
-      MYSQL_USER: luis
-      MYSQL_PASSWORD: joseluis
-    ports: 
-      - "3306:3306"
+      MYSQL_USER: elisa
+      MYSQL_PASSWORD: anaelisa
+    ports:
+        - "3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql
-    command : -- bind-address =0.0.0.0
+    command : --bind-address=0.0.0.0
     networks:
-    - mysql_network
-
+        - mysql_network      
 volumes:
-  mysql_data:
+   mysql_data:
     driver: local
 networks:
   mysql_network:

@@ -1,7 +1,8 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
-using MySql.Data.MySqlClient;
 
 namespace WinMysql.Clases
 {
@@ -39,4 +40,21 @@ namespace WinMysql.Clases
             }
         }
     }
-}
+    public DataSet ejecutar(string comando)
+        {
+            try
+            {
+                Conectar();
+                MySqlDataAdapter dA = new MySqlDataAdapter(comando, conexion);
+                DataSet ds = new DataSet();
+                dA.Fill(ds);
+                return ds; 
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null; 
+
+            }
+        }
