@@ -29,6 +29,7 @@ namespace WinMysql.Vistas
                 datos.ejecutar(); 
             } catch (Exception ex)
             {
+                MessageBox.Show(ex.Message); 
 
             }
         }

@@ -9,7 +9,7 @@ namespace WinMysql.Clases
     internal class datos
     {
         string cadenaConexion = "server=localhost;user=luis;pwd=joseLuis";
-        MySqlConnection conexion; 
+        MySqlConnection conexion;
         private void Conectar()
         {
             try
@@ -21,26 +21,27 @@ namespace WinMysql.Clases
             {
                 Console.WriteLine(ex.Message);
             }
-        
+
         }
 
         private void desconectar()
         {
             try
             {
-                if(conexion= != null)
+                if (conexion != null)
                 {
                     conexion.Close();
                 }
 
-            }catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
 
             }
         }
-    }
-    public DataSet ejecutar(string comando)
+
+        public DataSet ejecutar(string comando)
         {
             try
             {
@@ -48,13 +49,16 @@ namespace WinMysql.Clases
                 MySqlDataAdapter dA = new MySqlDataAdapter(comando, conexion);
                 DataSet ds = new DataSet();
                 dA.Fill(ds);
-                return ds; 
+                return ds;
 
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return null; 
+                return null;
 
             }
         }
+    }
+}
+    
