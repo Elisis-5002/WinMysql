@@ -12,6 +12,7 @@ namespace WinMysql.Vistas
     public partial class frmMaterias : Form
     {
         datos datos = new datos();
+        DataSet ds;
         public frmMaterias()
         {
             InitializeComponent();
@@ -26,8 +27,13 @@ namespace WinMysql.Vistas
         {
             try
             {
-                datos.ejecutar(); 
-            } catch (Exception ex)
+                ds = datos.ejecutar("SELECT * FROM materias");
+                if (ds != null)
+                {
+                    dgvMaterias.DataSource = ds.Tables[0];
+                }
+
+                } catch (Exception ex)
             {
                 MessageBox.Show(ex.Message); 
 

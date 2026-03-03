@@ -32,12 +32,12 @@
             btnAgregarMateria = new Button();
             label1 = new Label();
             txbBuscar = new TextBox();
-            dataGridView1 = new DataGridView();
+            dgvMaterias = new DataGridView();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
             splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvMaterias).BeginInit();
             SuspendLayout();
             // 
             // splitContainer1
@@ -55,7 +55,7 @@
             // 
             // splitContainer1.Panel2
             // 
-            splitContainer1.Panel2.Controls.Add(dataGridView1);
+            splitContainer1.Panel2.Controls.Add(dgvMaterias);
             splitContainer1.Size = new Size(903, 450);
             splitContainer1.SplitterDistance = 266;
             splitContainer1.TabIndex = 0;
@@ -86,15 +86,15 @@
             txbBuscar.Size = new Size(727, 31);
             txbBuscar.TabIndex = 0;
             // 
-            // dataGridView1
+            // dgvMaterias
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Dock = DockStyle.Fill;
-            dataGridView1.Location = new Point(0, 0);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersWidth = 62;
-            dataGridView1.Size = new Size(903, 180);
-            dataGridView1.TabIndex = 0;
+            dgvMaterias.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvMaterias.Dock = DockStyle.Fill;
+            dgvMaterias.Location = new Point(0, 0);
+            dgvMaterias.Name = "dgvMaterias";
+            dgvMaterias.RowHeadersWidth = 62;
+            dgvMaterias.Size = new Size(903, 180);
+            dgvMaterias.TabIndex = 0;
             // 
             // frmMaterias
             // 
@@ -110,7 +110,7 @@
             splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
             splitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvMaterias).EndInit();
             ResumeLayout(false);
         }
 
@@ -119,7 +119,7 @@
         private SplitContainer splitContainer1;
         private Label label1;
         private TextBox txbBuscar;
-        private DataGridView dataGridView1;
+        private DataGridView dgvMaterias;
         private Button btnAgregarMateria;
     }
 }
