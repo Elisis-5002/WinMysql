@@ -25,19 +25,42 @@ namespace WinMysql.Vistas
 
         private void frmMaterias_Load(object sender, EventArgs e)
         {
+
+        }
+
+        private void btnAgregarMateria_Click(object sender, EventArgs e)
+        {
+            frmMateria materia = new frmMateria();
+            materia.ShowDialog();
+            frmMaterias_Load(sender, e);
+        }
+
+        private void frmMaterias_Activated(object sender, EventArgs e)
+        {
             try
             {
-                ds = datos.ejecutar("SELECT * FROM materias");
+                ds = datos.ejecutar("SELECT * FROM Materias");
                 if (ds != null)
                 {
                     dgvMaterias.DataSource = ds.Tables[0];
                 }
 
-                } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
-                MessageBox.Show(ex.Message); 
+                MessageBox.Show(ex.Message);
 
             }
+
+        }
+
+        private void dgvMaterias_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            frmMateria materia = new frmMateria(
+               Convert.ToInt32(dgvMaterias.CurrentRow.Cells[0].Value),
+               dgvMaterias.CurrentRow.Cells[1].Value.ToString(),
+               dgvMaterias.CurrentRow.Cells[2].Value.ToString());
+            materia.ShowDialog();
         }
     }
 }

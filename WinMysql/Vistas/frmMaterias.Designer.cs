@@ -56,8 +56,8 @@
             // splitContainer1.Panel2
             // 
             splitContainer1.Panel2.Controls.Add(dgvMaterias);
-            splitContainer1.Size = new Size(903, 450);
-            splitContainer1.SplitterDistance = 266;
+            splitContainer1.Size = new Size(935, 482);
+            splitContainer1.SplitterDistance = 138;
             splitContainer1.TabIndex = 0;
             // 
             // btnAgregarMateria
@@ -68,11 +68,12 @@
             btnAgregarMateria.TabIndex = 3;
             btnAgregarMateria.Text = "Agregar";
             btnAgregarMateria.UseVisualStyleBackColor = true;
+            btnAgregarMateria.Click += btnAgregarMateria_Click;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(63, 21);
+            label1.Location = new Point(23, 21);
             label1.Name = "label1";
             label1.Size = new Size(63, 25);
             label1.TabIndex = 1;
@@ -93,17 +94,19 @@
             dgvMaterias.Location = new Point(0, 0);
             dgvMaterias.Name = "dgvMaterias";
             dgvMaterias.RowHeadersWidth = 62;
-            dgvMaterias.Size = new Size(903, 180);
+            dgvMaterias.Size = new Size(935, 340);
             dgvMaterias.TabIndex = 0;
+            dgvMaterias.CellContentDoubleClick += dgvMaterias_CellContentDoubleClick;
             // 
             // frmMaterias
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(903, 450);
+            ClientSize = new Size(935, 482);
             Controls.Add(splitContainer1);
             Name = "frmMaterias";
             Text = "Materias";
+            Activated += frmMaterias_Activated;
             Load += frmMaterias_Load;
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel1.PerformLayout();

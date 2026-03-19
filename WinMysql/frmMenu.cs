@@ -19,5 +19,17 @@ namespace WinMysql
             frmMaterias materias = new frmMaterias();
             materias.ShowDialog();
         }
+
+        private void alumnosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmAlumnos alumnos = new frmAlumnos();
+            alumnos.Show();
+        }
+
+        private void profesoresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmProfesores profesores = new frmProfesores();
+            profesores.Show();
+        }
     }
 }

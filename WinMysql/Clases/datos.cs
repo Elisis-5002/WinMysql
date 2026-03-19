@@ -1,15 +1,19 @@
-﻿using MySql.Data.MySqlClient;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design.Serialization;
 using System.Data;
 using System.Text;
+
+
+using MySqlConnector;
 
 namespace WinMysql.Clases
 {
     internal class datos
     {
-        string cadenaConexion = "server=localhost;user=luis;pwd=joseLuis";
+        string cadenaConexion = "server=localhost;user=elisa;pwd=anaelisa;Database=escolar";
         MySqlConnection conexion;
+
         private void Conectar()
         {
             try
@@ -21,10 +25,9 @@ namespace WinMysql.Clases
             {
                 Console.WriteLine(ex.Message);
             }
-
         }
 
-        private void desconectar()
+        private void Desconectar()
         {
             try
             {
@@ -32,12 +35,10 @@ namespace WinMysql.Clases
                 {
                     conexion.Close();
                 }
-
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-
             }
         }
 
@@ -46,9 +47,9 @@ namespace WinMysql.Clases
             try
             {
                 Conectar();
-                MySqlDataAdapter dA = new MySqlDataAdapter(comando, conexion);
+                MySqlDataAdapter da = new MySqlDataAdapter(comando, conexion);
                 DataSet ds = new DataSet();
-                dA.Fill(ds);
+                da.Fill(ds);
                 return ds;
 
             }
@@ -56,9 +57,27 @@ namespace WinMysql.Clases
             {
                 Console.WriteLine(ex.Message);
                 return null;
-
             }
         }
+
+        public bool ejecutarComando(String comando)
+        {
+            try
+            {
+                Conectar();
+                MySqlCommand cmd = new MySqlCommand(comando, conexion);
+                cmd.ExecuteNonQuery();
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+
+        }
+
+
     }
 }
-    
