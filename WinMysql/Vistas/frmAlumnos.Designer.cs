@@ -107,6 +107,7 @@
             dgvAlumnos.RowHeadersWidth = 62;
             dgvAlumnos.Size = new Size(800, 320);
             dgvAlumnos.TabIndex = 0;
+            dgvAlumnos.CellContentClick += dgvAlumnos_CellContentClick;
             // 
             // ofdExcel
             // 

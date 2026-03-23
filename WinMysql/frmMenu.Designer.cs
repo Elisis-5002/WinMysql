@@ -35,6 +35,7 @@
             materiaToolStripMenuItem = new ToolStripMenuItem();
             alumnosToolStripMenuItem = new ToolStripMenuItem();
             profesoresToolStripMenuItem = new ToolStripMenuItem();
+            asistenciaToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -63,7 +64,7 @@
             // 
             // cátalogoToolStripMenuItem
             // 
-            cátalogoToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { materiaToolStripMenuItem, alumnosToolStripMenuItem, profesoresToolStripMenuItem });
+            cátalogoToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { materiaToolStripMenuItem, alumnosToolStripMenuItem, profesoresToolStripMenuItem, asistenciaToolStripMenuItem });
             cátalogoToolStripMenuItem.Name = "cátalogoToolStripMenuItem";
             cátalogoToolStripMenuItem.Size = new Size(100, 29);
             cátalogoToolStripMenuItem.Text = "Cátalogo";
@@ -88,6 +89,13 @@
             profesoresToolStripMenuItem.Size = new Size(270, 34);
             profesoresToolStripMenuItem.Text = "Profesores";
             profesoresToolStripMenuItem.Click += profesoresToolStripMenuItem_Click;
+            // 
+            // asistenciaToolStripMenuItem
+            // 
+            asistenciaToolStripMenuItem.Name = "asistenciaToolStripMenuItem";
+            asistenciaToolStripMenuItem.Size = new Size(270, 34);
+            asistenciaToolStripMenuItem.Text = "Asistencia";
+            asistenciaToolStripMenuItem.Click += asistenciaToolStripMenuItem_Click;
             // 
             // frmMenu
             // 
@@ -114,5 +122,6 @@
         private ToolStripMenuItem materiaToolStripMenuItem;
         private ToolStripMenuItem alumnosToolStripMenuItem;
         private ToolStripMenuItem profesoresToolStripMenuItem;
+        private ToolStripMenuItem asistenciaToolStripMenuItem;
     }
 }

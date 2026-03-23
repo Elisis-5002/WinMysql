@@ -21,13 +21,13 @@ namespace WinMysql.Vistas
 
         private void txtAlumno_TextChanged(object sender, EventArgs e)
         {
-            Busqueda(); 
+            Busqueda();
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             frmAgregarAlum agregarAlum = new frmAgregarAlum();
-            agregarAlum.Show(); 
+            agregarAlum.Show();
         }
 
         private void btnImportar_Click(object sender, EventArgs e)
@@ -81,7 +81,12 @@ namespace WinMysql.Vistas
 
         private void frmAlumnos_Load(object sender, EventArgs e)
         {
-            Busqueda(); 
+            Busqueda();
+        }
+
+        private void dgvAlumnos_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 
