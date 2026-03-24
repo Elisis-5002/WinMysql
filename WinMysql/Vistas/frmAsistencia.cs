@@ -12,9 +12,10 @@ namespace WinMysql.Vistas
     public partial class frmAsistencia : Form
     {
         datos datos = new datos();
-  
+
         bool updating = false;
         int id = 0;
+        int presente;
         public frmAsistencia()
         {
             InitializeComponent();
@@ -35,15 +36,27 @@ namespace WinMysql.Vistas
             }
         }
 
+        private void Asistencia()
+        {
+            DataSet ds2 = datos.ejecutar($"Select idAsistencia, fecha, presente, noControl " +
+                $"From Asistencia A JOIN Alumnos AL ON A.idAlumno = AL.idAlumnos " +
+                $" Where fecha = '{dtpFecha.Value.ToString("yyyy-MM-dd")}%'");
+            if (ds2 != null)
+            {
+                dgvAsistencia.DataSource = ds2.Tables[0];
+            }
+        }
 
         private void rdbAusente_CheckedChanged(object sender, EventArgs e)
         {
+            presente = 0;
 
         }
 
         private void frmAsistencia_Load(object sender, EventArgs e)
         {
             Busqueda();
+            Asistencia();
         }
 
         private void dgvAlumnos_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -55,8 +68,9 @@ namespace WinMysql.Vistas
         {
             if (updating == false)
             {
-                bool resultado = datos.ejecutarComando($"INSERT INTO Asistencia (fecha, idAlumno) VALUES" +
-                    $" ('{dtpFecha.Value.ToString("yyyy-MM-dd")}', '{txtNoControl.Text}')");
+                bool resultado = datos.ejecutarComando($"INSERT INTO Asistencia (fecha, presente, idAlumno) VALUES " +
+                    $" ('{dtpFecha.Value.ToString("yyyy-MM-dd")}',{presente}, " +
+                    $"(SELECT idAlumnos FROM Alumnos WHERE noControl = '{txtNoControl.Text}' LIMIT 1))");
 
                 if (resultado)
                 {
@@ -64,7 +78,7 @@ namespace WinMysql.Vistas
                 }
                 else
                 {
-                    MessageBox.Show("Error al agregar asistencia");
+                    MessageBox.Show("Error al agregar asistencia, favor de llenar los campos");
                 }
             }
             else
@@ -82,6 +96,21 @@ namespace WinMysql.Vistas
                     MessageBox.Show("Error al actualizar asistencia");
                 }
             }
+
+        }
+
+        private void rdbPresente_CheckedChanged(object sender, EventArgs e)
+        {
+            presente = 1;
+        }
+
+        private void btnMostrar_Click(object sender, EventArgs e)
+        {
+            Asistencia();
+        }
+
+        private void txtNoControl_TextChanged(object sender, EventArgs e)
+        {
 
         }
     }
