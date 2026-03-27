@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FastReport.DevComponents.DotNetBar;
+using FastReport.Editor.Common;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,102 +16,178 @@ namespace WinMysql.Vistas
         datos datos = new datos();
 
         bool updating = false;
-        int id = 0;
         int presente;
+
         public frmAsistencia()
         {
             InitializeComponent();
         }
 
-        public frmAsistencia(int id, DateTime fecha, int idAlumno)
-        {
-            InitializeComponent();
-
-        }
         private void Busqueda()
         {
-            DataSet ds = datos.ejecutar($"Select nocontrol,nombre,paterno,materno From Alumnos" +
-                $" Where nombre like '{txtNoControl.Text}%'");
+            DataSet ds = datos.ejecutar(
+                $"SELECT noControl, nombre, paterno, materno FROM Alumnos " +
+                $"WHERE noControl LIKE '{txtNoControl.Text}%' " +
+                $"ORDER BY noControl");
             if (ds != null)
             {
                 dgvAlumnos.DataSource = ds.Tables[0];
             }
-        }
-
-        private void Asistencia()
-        {
-            DataSet ds2 = datos.ejecutar($"Select idAsistencia, fecha, presente, noControl " +
-                $"From Asistencia A JOIN Alumnos AL ON A.idAlumno = AL.idAlumnos " +
-                $" Where fecha = '{dtpFecha.Value.ToString("yyyy-MM-dd")}%'");
-            if (ds2 != null)
+            else
             {
-                dgvAsistencia.DataSource = ds2.Tables[0];
+                MessageBox.Show("Ingrese un No. Control válido");
             }
         }
-
-        private void rdbAusente_CheckedChanged(object sender, EventArgs e)
+        private Boolean Busqueda2()
         {
-            presente = 0;
-
+            DataSet ds = datos.ejecutar(
+                $"SELECT noControl, nombre, paterno, materno FROM Alumnos " +
+                $"WHERE noControl LIKE '{txtNoControl.Text}%' " +
+                $"ORDER BY noControl");
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("Alumno no registrado");
+                return false;
+            }
         }
 
         private void frmAsistencia_Load(object sender, EventArgs e)
         {
             Busqueda();
-            Asistencia();
         }
 
-        private void dgvAlumnos_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void btnGuardar_Click(object sender, EventArgs e)
-        {
-            if (updating == false)
-            {
-                bool resultado = datos.ejecutarComando($"INSERT INTO Asistencia (fecha, presente, idAlumno) VALUES " +
-                    $" ('{dtpFecha.Value.ToString("yyyy-MM-dd")}',{presente}, " +
-                    $"(SELECT idAlumnos FROM Alumnos WHERE noControl = '{txtNoControl.Text}' LIMIT 1))");
-
-                if (resultado)
-                {
-                    MessageBox.Show("Asistencia agregada correctamente");
-                }
-                else
-                {
-                    MessageBox.Show("Error al agregar asistencia, favor de llenar los campos");
-                }
-            }
-            else
-            {
-                bool resultado = datos.ejecutarComando($"UPDATE Asistencia SET fecha='{dtpFecha.Text}'" +
-                    $"', idAlumno='{txtNoControl.Text}'" +
-                    $" WHERE idAsistencia={id}");
-                if (resultado)
-                {
-                    MessageBox.Show("Asistencia actualizada correctamente");
-                    this.Close();
-                }
-                else
-                {
-                    MessageBox.Show("Error al actualizar asistencia");
-                }
-            }
-
-        }
-
-        private void rdbPresente_CheckedChanged(object sender, EventArgs e)
-        {
-            presente = 1;
-        }
-
-        private void btnMostrar_Click(object sender, EventArgs e)
-        {
-            Asistencia();
-        }
 
         private void txtNoControl_TextChanged(object sender, EventArgs e)
+        {
+            Busqueda();
+        }
+
+        private void dtpFecha_ValueChanged(object sender, EventArgs e)
+        {
+            txtNoControl.Focus();
+        }
+
+        private void MarcarAsistencia()
+        {
+            string noControl = txtNoControl.Text.Trim();
+
+            for (int i = 0; i < dgvAlumnos.Rows.Count - 1; i++)
+            {
+                if (dgvAlumnos.Rows[i].IsNewRow) continue;
+
+                if ((dgvAlumnos.Rows[i].Cells[1].Value.ToString() == noControl))
+                {
+                    bool estado = Convert.ToBoolean(dgvAlumnos.Rows[i].Cells[0].Value ?? false);
+                    dgvAlumnos.Rows[i].Cells[0].Value = !estado;
+
+                    if (!estado)
+                    {
+                        dgvAlumnos.Rows[i].DefaultCellStyle.BackColor = Color.LightGreen;
+                    }
+
+                    break;
+                }
+            }
+
+            txtNoControl.Clear();
+        }
+
+        private void txtNoControl_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (Busqueda2())
+                {
+                    MarcarAsistencia();
+
+                }
+            }
+
+        }
+
+        private void dgvAlumnos_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            txtNoControl.Text = dgvAlumnos.CurrentRow.Cells[1].Value.ToString();
+            txtNoControl.Focus();
+        }
+
+        private void btnGuardar_Click_1(object sender, EventArgs e)
+        {
+            GuardarAsistencia();  // guardas en BD
+        }
+
+        private void GuardarAsistencia()
+        {
+            string fecha = dtpFecha.Value.ToString("yyyy-MM-dd");
+
+            bool todoCorrecto = true;
+
+            for (int i = 0; i < dgvAlumnos.Rows.Count; i++)
+            {
+                if (dgvAlumnos.Rows[i].IsNewRow) continue;
+
+                string noControl = dgvAlumnos.Rows[i].Cells[1].Value.ToString();
+
+                bool presente = Convert.ToBoolean(
+                    dgvAlumnos.Rows[i].Cells[0].Value ?? false);
+
+                int estado = presente ? 1 : 0;
+
+                string query = $@"
+                INSERT INTO Asistencia (fecha, presente, idAlumno)
+                VALUES ('{fecha}', {estado},
+                (SELECT idAlumnos FROM Alumnos WHERE noControl = '{noControl}' LIMIT 1))
+                ON DUPLICATE KEY UPDATE presente = {estado}";
+
+                bool resultado = datos.ejecutarComando(query);
+
+                if (!resultado)
+                {
+                    todoCorrecto = false;
+                }
+            }
+
+            if (todoCorrecto)
+                MessageBox.Show("Asistencia guardada correctamente");
+            else
+                MessageBox.Show("Algunos registros fallaron ");
+        }
+
+
+
+
+        private void dtpFecha_ValueChanged_1(object sender, EventArgs e)
+        {
+
+
+        }
+
+        private void dtpFecha_CloseUp_1(object sender, EventArgs e)
+        {
+            txtNoControl.Focus();
+        }
+
+        private void Todos()
+        {
+            for (int i = 0; i < dgvAlumnos.Rows.Count; i++)
+            {
+                if (dgvAlumnos.Rows[i].IsNewRow) continue;
+                dgvAlumnos.Rows[i].Cells[0].Value = true;
+                dgvAlumnos.Rows[i].DefaultCellStyle.BackColor = Color.LightGreen;
+            }
+        }
+
+        private void btnTodos_Click(object sender, EventArgs e)
+        {
+            Todos();
+            MarcarAsistencia();
+        }
+
+        private void txtNoControl_TextChanged_1(object sender, EventArgs e)
         {
 
         }

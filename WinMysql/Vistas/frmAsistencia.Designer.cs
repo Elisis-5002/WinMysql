@@ -28,221 +28,140 @@
         /// </summary>
         private void InitializeComponent()
         {
+            splitContainer1 = new SplitContainer();
+            btnTodos = new Button();
+            btnGuardar = new Button();
             dtpFecha = new DateTimePicker();
             label1 = new Label();
-            dgvAlumnos = new DataGridView();
-            splitContainer1 = new SplitContainer();
-            btnMostrar = new Button();
-            dgvAsistencia = new DataGridView();
-            btnGuardar = new Button();
-            gpbAsistencia = new GroupBox();
-            rdbAusente = new RadioButton();
-            rdbPresente = new RadioButton();
-            label2 = new Label();
             txtNoControl = new TextBox();
-            splitContainer2 = new SplitContainer();
-            ((System.ComponentModel.ISupportInitialize)dgvAlumnos).BeginInit();
+            dgvAlumnos = new DataGridView();
+            Presente = new DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
             splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvAsistencia).BeginInit();
-            gpbAsistencia.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)splitContainer2).BeginInit();
-            splitContainer2.Panel1.SuspendLayout();
-            splitContainer2.Panel2.SuspendLayout();
-            splitContainer2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvAlumnos).BeginInit();
             SuspendLayout();
-            // 
-            // dtpFecha
-            // 
-            dtpFecha.Location = new Point(335, 54);
-            dtpFecha.Name = "dtpFecha";
-            dtpFecha.Size = new Size(385, 31);
-            dtpFecha.TabIndex = 0;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(322, 26);
-            label1.Name = "label1";
-            label1.Size = new Size(57, 25);
-            label1.TabIndex = 1;
-            label1.Text = "Fecha";
-            // 
-            // dgvAlumnos
-            // 
-            dgvAlumnos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvAlumnos.Dock = DockStyle.Fill;
-            dgvAlumnos.Location = new Point(0, 0);
-            dgvAlumnos.Name = "dgvAlumnos";
-            dgvAlumnos.RowHeadersWidth = 62;
-            dgvAlumnos.Size = new Size(303, 660);
-            dgvAlumnos.TabIndex = 2;
-            dgvAlumnos.CellContentClick += dgvAlumnos_CellContentClick;
             // 
             // splitContainer1
             // 
             splitContainer1.Dock = DockStyle.Fill;
             splitContainer1.Location = new Point(0, 0);
             splitContainer1.Name = "splitContainer1";
+            splitContainer1.Orientation = Orientation.Horizontal;
             // 
             // splitContainer1.Panel1
             // 
-            splitContainer1.Panel1.Controls.Add(dgvAlumnos);
+            splitContainer1.Panel1.Controls.Add(btnTodos);
+            splitContainer1.Panel1.Controls.Add(btnGuardar);
+            splitContainer1.Panel1.Controls.Add(dtpFecha);
+            splitContainer1.Panel1.Controls.Add(label1);
+            splitContainer1.Panel1.Controls.Add(txtNoControl);
             // 
             // splitContainer1.Panel2
             // 
-            splitContainer1.Panel2.Controls.Add(btnMostrar);
-            splitContainer1.Panel2.Controls.Add(btnGuardar);
-            splitContainer1.Panel2.Controls.Add(gpbAsistencia);
-            splitContainer1.Panel2.Controls.Add(label2);
-            splitContainer1.Panel2.Controls.Add(txtNoControl);
-            splitContainer1.Panel2.Controls.Add(label1);
-            splitContainer1.Panel2.Controls.Add(splitContainer2);
-            splitContainer1.Size = new Size(1095, 660);
-            splitContainer1.SplitterDistance = 303;
-            splitContainer1.TabIndex = 3;
+            splitContainer1.Panel2.Controls.Add(dgvAlumnos);
+            splitContainer1.Size = new Size(1223, 646);
+            splitContainer1.SplitterDistance = 128;
+            splitContainer1.TabIndex = 0;
             // 
-            // btnMostrar
+            // btnTodos
             // 
-            btnMostrar.Location = new Point(595, 191);
-            btnMostrar.Name = "btnMostrar";
-            btnMostrar.Size = new Size(112, 34);
-            btnMostrar.TabIndex = 7;
-            btnMostrar.Text = "Mostrar";
-            btnMostrar.UseVisualStyleBackColor = true;
-            btnMostrar.Click += btnMostrar_Click;
-            // 
-            // dgvAsistencia
-            // 
-            dgvAsistencia.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvAsistencia.Dock = DockStyle.Fill;
-            dgvAsistencia.Location = new Point(0, 0);
-            dgvAsistencia.Name = "dgvAsistencia";
-            dgvAsistencia.RowHeadersWidth = 62;
-            dgvAsistencia.Size = new Size(788, 397);
-            dgvAsistencia.TabIndex = 6;
+            btnTodos.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnTodos.Location = new Point(1013, 15);
+            btnTodos.Name = "btnTodos";
+            btnTodos.Size = new Size(198, 44);
+            btnTodos.TabIndex = 4;
+            btnTodos.Text = "Todos Presentes";
+            btnTodos.UseVisualStyleBackColor = true;
+            btnTodos.Click += btnTodos_Click;
             // 
             // btnGuardar
             // 
-            btnGuardar.Location = new Point(595, 113);
+            btnGuardar.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnGuardar.Location = new Point(1013, 65);
             btnGuardar.Name = "btnGuardar";
-            btnGuardar.Size = new Size(112, 34);
-            btnGuardar.TabIndex = 5;
+            btnGuardar.Size = new Size(198, 42);
+            btnGuardar.TabIndex = 3;
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = true;
-            btnGuardar.Click += btnGuardar_Click;
+            btnGuardar.Click += btnGuardar_Click_1;
             // 
-            // gpbAsistencia
+            // dtpFecha
             // 
-            gpbAsistencia.Controls.Add(rdbAusente);
-            gpbAsistencia.Controls.Add(rdbPresente);
-            gpbAsistencia.Location = new Point(29, 113);
-            gpbAsistencia.Name = "gpbAsistencia";
-            gpbAsistencia.Size = new Size(300, 112);
-            gpbAsistencia.TabIndex = 4;
-            gpbAsistencia.TabStop = false;
-            gpbAsistencia.Text = "Estado";
+            dtpFecha.CalendarFont = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dtpFecha.Location = new Point(325, 60);
+            dtpFecha.Name = "dtpFecha";
+            dtpFecha.Size = new Size(354, 31);
+            dtpFecha.TabIndex = 2;
+            dtpFecha.CloseUp += dtpFecha_CloseUp_1;
             // 
-            // rdbAusente
+            // label1
             // 
-            rdbAusente.AutoSize = true;
-            rdbAusente.Location = new Point(19, 78);
-            rdbAusente.Name = "rdbAusente";
-            rdbAusente.Size = new Size(101, 29);
-            rdbAusente.TabIndex = 1;
-            rdbAusente.TabStop = true;
-            rdbAusente.Text = "Ausente";
-            rdbAusente.UseVisualStyleBackColor = true;
-            rdbAusente.CheckedChanged += rdbAusente_CheckedChanged;
-            // 
-            // rdbPresente
-            // 
-            rdbPresente.AutoSize = true;
-            rdbPresente.Location = new Point(16, 43);
-            rdbPresente.Name = "rdbPresente";
-            rdbPresente.Size = new Size(104, 29);
-            rdbPresente.TabIndex = 0;
-            rdbPresente.TabStop = true;
-            rdbPresente.Text = "Presente";
-            rdbPresente.UseVisualStyleBackColor = true;
-            rdbPresente.CheckedChanged += rdbPresente_CheckedChanged;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(29, 26);
-            label2.Name = "label2";
-            label2.Size = new Size(170, 25);
-            label2.TabIndex = 3;
-            label2.Text = "Número de Control:";
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.Location = new Point(30, 21);
+            label1.Name = "label1";
+            label1.Size = new Size(140, 32);
+            label1.TabIndex = 1;
+            label1.Text = "No. Control";
             // 
             // txtNoControl
             // 
-            txtNoControl.Location = new Point(29, 54);
+            txtNoControl.Location = new Point(30, 60);
             txtNoControl.Name = "txtNoControl";
-            txtNoControl.Size = new Size(209, 31);
-            txtNoControl.TabIndex = 2;
-            txtNoControl.TextChanged += txtNoControl_TextChanged;
+            txtNoControl.Size = new Size(260, 31);
+            txtNoControl.TabIndex = 0;
+            txtNoControl.TextChanged += txtNoControl_TextChanged_1;
+            txtNoControl.KeyDown += txtNoControl_KeyDown;
             // 
-            // splitContainer2
+            // dgvAlumnos
             // 
-            splitContainer2.Dock = DockStyle.Fill;
-            splitContainer2.Location = new Point(0, 0);
-            splitContainer2.Name = "splitContainer2";
-            splitContainer2.Orientation = Orientation.Horizontal;
+            dgvAlumnos.BackgroundColor = SystemColors.ButtonFace;
+            dgvAlumnos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvAlumnos.Columns.AddRange(new DataGridViewColumn[] { Presente });
+            dgvAlumnos.Dock = DockStyle.Fill;
+            dgvAlumnos.Location = new Point(0, 0);
+            dgvAlumnos.Name = "dgvAlumnos";
+            dgvAlumnos.RowHeadersWidth = 62;
+            dgvAlumnos.Size = new Size(1223, 514);
+            dgvAlumnos.TabIndex = 0;
+            dgvAlumnos.CellContentClick += dgvAlumnos_CellContentClick_1;
             // 
-            // splitContainer2.Panel1
+            // Presente
             // 
-            splitContainer2.Panel1.Controls.Add(dtpFecha);
-            // 
-            // splitContainer2.Panel2
-            // 
-            splitContainer2.Panel2.Controls.Add(dgvAsistencia);
-            splitContainer2.Size = new Size(788, 660);
-            splitContainer2.SplitterDistance = 259;
-            splitContainer2.TabIndex = 8;
+            Presente.HeaderText = "Presente";
+            Presente.MinimumWidth = 8;
+            Presente.Name = "Presente";
+            Presente.Width = 150;
             // 
             // frmAsistencia
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1095, 660);
+            ClientSize = new Size(1223, 646);
             Controls.Add(splitContainer1);
             Name = "frmAsistencia";
             Text = "Asistencia";
             Load += frmAsistencia_Load;
-            ((System.ComponentModel.ISupportInitialize)dgvAlumnos).EndInit();
             splitContainer1.Panel1.ResumeLayout(false);
+            splitContainer1.Panel1.PerformLayout();
             splitContainer1.Panel2.ResumeLayout(false);
-            splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
             splitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dgvAsistencia).EndInit();
-            gpbAsistencia.ResumeLayout(false);
-            gpbAsistencia.PerformLayout();
-            splitContainer2.Panel1.ResumeLayout(false);
-            splitContainer2.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)splitContainer2).EndInit();
-            splitContainer2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgvAlumnos).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
+        private SplitContainer splitContainer1;
         private DateTimePicker dtpFecha;
         private Label label1;
-        private DataGridView dgvAlumnos;
-        private SplitContainer splitContainer1;
-        private GroupBox gpbAsistencia;
-        private Label label2;
         private TextBox txtNoControl;
-        private RadioButton rdbAusente;
-        private RadioButton rdbPresente;
+        private DataGridView dgvAlumnos;
+        private DataGridViewCheckBoxColumn Presente;
         private Button btnGuardar;
-        private DataGridView dgvAsistencia;
-        private Button btnMostrar;
-        private SplitContainer splitContainer2;
+        private Button btnTodos;
     }
 }
